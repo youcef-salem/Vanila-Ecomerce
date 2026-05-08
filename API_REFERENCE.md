@@ -226,6 +226,56 @@ Empty the entire cart.
 
 ---
 
+## Delivery & Checkout
+
+### `GET /delivery/wilayas`
+
+List delivery wilayas and base prices.
+
+**Response 200**
+```json
+{
+  "items": [
+    { "id": "16", "name": "Alger", "price": 400 }
+  ]
+}
+```
+
+### `GET /delivery/methods`
+
+List delivery methods and extra fees.
+
+**Response 200**
+```json
+{
+  "items": [
+    { "id": "domicile", "label": "Domicile", "extra": 200 },
+    { "id": "ondesk", "label": "On desk", "extra": 0 }
+  ]
+}
+```
+
+### `POST /checkout`
+
+Create a checkout request from the current cart.
+
+**Request body**
+```json
+{
+  "wilayaId": "16",
+  "deliveryMethod": "domicile",
+  "paymentMethod": "dahabiya",
+  "address": "12 Rue Didouche Mourad, Alger"
+}
+```
+
+**Response 201**
+```json
+{ "ok": true, "orderId": "ord_123" }
+```
+
+---
+
 ## Admin
 
 All `/admin/*` endpoints require an authenticated user with `role === "admin"`.

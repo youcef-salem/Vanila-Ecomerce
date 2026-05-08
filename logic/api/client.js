@@ -16,7 +16,13 @@
  * through this client, which keeps the swap to a real backend trivial.
  */
 
-import { MOCK_PRODUCTS, MOCK_CATEGORIES, MOCK_USERS } from './mock-data.js';
+import {
+  MOCK_PRODUCTS,
+  MOCK_CATEGORIES,
+  MOCK_USERS,
+  MOCK_DELIVERY_WILAYAS,
+  MOCK_DELIVERY_METHODS,
+} from './mock-data.js';
 
 // ---- Configuration ---------------------------------------------------------
 
@@ -200,6 +206,20 @@ export const api = {
     if (!USE_MOCK) return realRequest('GET', '/categories');
     await sleep(80);
     return { items: MOCK_CATEGORIES };
+  },
+
+  /** GET /api/delivery/wilayas */
+  async listDeliveryWilayas() {
+    if (!USE_MOCK) return realRequest('GET', '/delivery/wilayas');
+    await sleep(80);
+    return { items: MOCK_DELIVERY_WILAYAS };
+  },
+
+  /** GET /api/delivery/methods */
+  async listDeliveryMethods() {
+    if (!USE_MOCK) return realRequest('GET', '/delivery/methods');
+    await sleep(80);
+    return { items: MOCK_DELIVERY_METHODS };
   },
 
   // ---- Auth -------------------------------------------------------------

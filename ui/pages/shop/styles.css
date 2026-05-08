@@ -9,6 +9,10 @@ body {
 	padding-top: calc(var(--header-height) + var(--filters-height));
 }
 
+#about {
+	scroll-margin-top: calc(var(--header-height) + var(--filters-height) + 24px);
+}
+
 /* ============================================================================
 	 SHOP PAGE — hero, filters, product grid
 	 ============================================================================ */
@@ -236,6 +240,40 @@ body {
 	from { background-position: 200% 0; }
 	to { background-position: -200% 0; }
 }
+
+/* About */
+.about {
+	padding: 4rem 0 6rem;
+	border-top: 1px solid var(--rule-soft);
+}
+.about-inner {
+	max-width: var(--page-max);
+	margin: 0 auto;
+	padding-inline: var(--page-pad);
+}
+.about h2 {
+	font-style: italic;
+	margin-top: 0.4rem;
+}
+.about-text {
+	max-width: 60ch;
+	color: var(--ink-soft);
+	margin: 1rem 0 2rem;
+}
+.about-meta {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 1.5rem;
+}
+.about-meta strong {
+	display: block;
+	font-size: 0.75rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--ink-mute);
+	margin-bottom: 0.4rem;
+}
+.about-meta span { color: var(--ink); }
 
 /* ============================================================================
 	 RESPONSIVE

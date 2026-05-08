@@ -97,7 +97,7 @@ function renderPage(state) {
       window.location.href = `/ui/pages/login/index.html?next=${next}`;
       return;
     }
-    toast('Demo only — checkout flow is not implemented.', { type: 'info' });
+    window.location.href = '/ui/pages/checkout/index.html';
   });
 }
 
