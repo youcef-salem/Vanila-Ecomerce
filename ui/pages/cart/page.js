@@ -2,9 +2,9 @@
  * Cart page
  */
 
-import { cart } from '../../../js/modules/cart.js';
-import { session } from '../../../js/modules/session.js';
-import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../js/modules/ui.js';
+import { cart } from '../../../logic/modules/cart.js';
+import { session } from '../../../logic/modules/session.js';
+import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap('cart');
 

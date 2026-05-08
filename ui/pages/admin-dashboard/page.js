@@ -5,9 +5,9 @@
  * - gates the whole page behind an admin-role check
  */
 
-import { api } from '../../../js/api/client.js';
-import { session } from '../../../js/modules/session.js';
-import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../js/modules/ui.js';
+import { api } from '../../../logic/api/client.js';
+import { session } from '../../../logic/modules/session.js';
+import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap('admin');
 

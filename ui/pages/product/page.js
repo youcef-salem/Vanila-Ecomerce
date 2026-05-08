@@ -2,9 +2,9 @@
  * Product detail page
  */
 
-import { api } from '../../../js/api/client.js';
-import { cart } from '../../../js/modules/cart.js';
-import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../../../js/modules/ui.js';
+import { api } from '../../../logic/api/client.js';
+import { cart } from '../../../logic/modules/cart.js';
+import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap('shop');
 

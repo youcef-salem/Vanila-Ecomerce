@@ -1,2 +1,58 @@
 @import '../../shared/main.css';
-@import '../../shared/components.css';
+
+/* ============================================================================
+	 AUTH PAGE — register
+	 ============================================================================ */
+.auth-page {
+	min-height: calc(100vh - 250px);
+	display: grid;
+	place-items: center;
+	padding: 3rem var(--page-pad);
+}
+.auth-card {
+	width: 100%;
+	max-width: 440px;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius-lg);
+	padding: 2.5rem;
+	box-shadow: var(--shadow);
+}
+
+.auth-eyebrow {
+	font-size: 0.7rem;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--ink-mute);
+	font-weight: 500;
+}
+.auth-title {
+	font-family: var(--font-display);
+	font-style: italic;
+	font-size: 2rem;
+	font-variation-settings: 'opsz' 60;
+	margin: 0.5rem 0 0.25rem;
+}
+.auth-title small {
+	display: block;
+	font-family: var(--font-body);
+	font-size: 0.9rem;
+	font-style: normal;
+	color: var(--ink-mute);
+	margin-top: 0.25rem;
+}
+.auth-card form { margin-top: 1.5rem; }
+.auth-foot {
+	margin-top: 1.5rem;
+	text-align: center;
+	font-size: 0.88rem;
+	color: var(--ink-mute);
+}
+.auth-foot a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ============================================================================
+	 RESPONSIVE
+	 ============================================================================ */
+@media (max-width: 640px) {
+	.auth-card { padding: 1.75rem; }
+}

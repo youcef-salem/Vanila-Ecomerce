@@ -2,9 +2,9 @@
  * Login page
  */
 
-import { session } from '../../../js/modules/session.js';
-import { cart } from '../../../js/modules/cart.js';
-import { bootstrap, toast, getQueryParam, onReady } from '../../../js/modules/ui.js';
+import { session } from '../../../logic/modules/session.js';
+import { cart } from '../../../logic/modules/cart.js';
+import { bootstrap, toast, getQueryParam, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap();
 
