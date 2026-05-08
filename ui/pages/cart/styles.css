@@ -15,8 +15,7 @@
 	margin-bottom: 2rem;
 }
 .cart-page header h1 {
-	font-style: italic;
-	font-variation-settings: 'opsz' 100;
+	font-style: normal;
 }
 .cart-page-grid {
 	display: grid;
@@ -44,8 +43,7 @@
 .cart-item-info h3 {
 	font-family: var(--font-display);
 	font-size: 1.15rem;
-	font-style: italic;
-	font-variation-settings: 'opsz' 40;
+	font-style: normal;
 	margin-bottom: 0.25rem;
 }
 .cart-item-info .item-price {
@@ -66,9 +64,8 @@
 }
 .cart-item-info .item-remove:hover { color: var(--negative); }
 .cart-item-subtotal {
-	font-family: var(--font-display);
+	font-family: var(--font-body);
 	font-size: 1.4rem;
-	font-variation-settings: 'opsz' 40;
 }
 
 .cart-summary {
@@ -80,9 +77,8 @@
 	top: 100px;
 }
 .cart-summary h3 {
-	font-family: var(--font-display);
-	font-style: italic;
-	font-variation-settings: 'opsz' 36;
+	font-family: var(--font-body);
+	font-style: normal;
 	margin-bottom: 1rem;
 }
 .summary-row {
@@ -94,11 +90,10 @@
 	border-top: 1px solid var(--rule);
 	margin-top: 0.5rem;
 	padding-top: 1rem;
-	font-family: var(--font-display);
+	font-family: var(--font-body);
 	font-size: 1.25rem;
-	font-variation-settings: 'opsz' 36;
 }
-.summary-row.total span:first-child { font-style: italic; }
+.summary-row.total span:first-child { font-style: normal; }
 .cart-summary .btn { margin-top: 1.25rem; }
 .cart-summary .summary-note {
 	font-size: 0.8rem;
@@ -114,8 +109,7 @@
 	border-radius: var(--radius-lg);
 }
 .cart-empty h2 {
-	font-style: italic;
-	font-variation-settings: 'opsz' 60;
+	font-style: normal;
 	margin-bottom: 0.75rem;
 }
 .cart-empty p { color: var(--ink-mute); margin-bottom: 1.5rem; }

@@ -27,10 +27,9 @@
 	font-weight: 500;
 }
 .auth-title {
-	font-family: var(--font-display);
-	font-style: italic;
+	font-family: var(--font-body);
+	font-style: normal;
 	font-size: 2rem;
-	font-variation-settings: 'opsz' 60;
 	margin: 0.5rem 0 0.25rem;
 }
 .auth-title small {
@@ -53,7 +52,7 @@
 .demo-creds {
 	margin-top: 1.5rem;
 	padding: 0.85rem 1rem;
-	background: rgba(184, 71, 42, 0.06);
+	background: var(--accent-tint);
 	border-radius: var(--radius-sm);
 	font-size: 0.82rem;
 	color: var(--ink-soft);

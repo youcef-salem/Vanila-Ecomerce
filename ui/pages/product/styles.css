@@ -48,8 +48,7 @@
 }
 .product-info h1 {
 	font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-	font-style: italic;
-	font-variation-settings: 'opsz' 80;
+	font-style: normal;
 	margin-bottom: 0.5rem;
 }
 .product-info-rating {
@@ -60,9 +59,8 @@
 .product-info-rating .stars { color: var(--accent); letter-spacing: 0.05em; }
 
 .product-info-price {
-	font-family: var(--font-display);
+	font-family: var(--font-body);
 	font-size: 2.25rem;
-	font-variation-settings: 'opsz' 60;
 	margin-bottom: 1.5rem;
 }
 

@@ -14,8 +14,7 @@
 	margin-bottom: 2rem;
 }
 .checkout-header h1 {
-	font-style: italic;
-	font-variation-settings: 'opsz' 90;
+	font-style: normal;
 }
 
 .checkout-grid {
@@ -66,9 +65,8 @@
 }
 
 .summary-title {
-	font-family: var(--font-display);
-	font-style: italic;
-	font-variation-settings: 'opsz' 36;
+	font-family: var(--font-body);
+	font-style: normal;
 	margin-bottom: 1rem;
 }
 .summary-row {
@@ -81,9 +79,8 @@
 	border-top: 1px solid var(--rule);
 	margin-top: 0.5rem;
 	padding-top: 1rem;
-	font-family: var(--font-display);
+	font-family: var(--font-body);
 	font-size: 1.25rem;
-	font-variation-settings: 'opsz' 36;
 }
 .summary-note {
 	font-size: 0.85rem;

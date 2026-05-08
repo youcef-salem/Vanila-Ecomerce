@@ -26,19 +26,19 @@
 .auth-card.admin .auth-eyebrow,
 .auth-card.admin .auth-title small,
 .auth-card.admin .auth-foot {
-	color: rgba(244, 237, 224, 0.6);
+	color: rgba(242, 243, 174, 0.7);
 }
 .auth-card.admin .field input {
-	background: rgba(244, 237, 224, 0.1);
-	border-color: rgba(244, 237, 224, 0.2);
+	background: rgba(242, 243, 174, 0.12);
+	border-color: rgba(242, 243, 174, 0.25);
 	color: var(--paper);
 }
 .auth-card.admin .field input:focus {
-	background: rgba(244, 237, 224, 0.15);
+	background: rgba(242, 243, 174, 0.2);
 	border-color: var(--accent);
 }
 .auth-card.admin .field label {
-	color: rgba(244, 237, 224, 0.6);
+	color: rgba(242, 243, 174, 0.7);
 }
 .auth-card.admin .btn-primary {
 	background: var(--accent);
@@ -55,10 +55,9 @@
 	font-weight: 500;
 }
 .auth-title {
-	font-family: var(--font-display);
-	font-style: italic;
+	font-family: var(--font-body);
+	font-style: normal;
 	font-size: 2rem;
-	font-variation-settings: 'opsz' 60;
 	margin: 0.5rem 0 0.25rem;
 }
 .auth-title small {
@@ -81,7 +80,7 @@
 .demo-creds {
 	margin-top: 1.5rem;
 	padding: 0.85rem 1rem;
-	background: rgba(184, 71, 42, 0.06);
+	background: var(--accent-tint);
 	border-radius: var(--radius-sm);
 	font-size: 0.82rem;
 	color: var(--ink-soft);
@@ -101,11 +100,11 @@
 	font-size: 0.78rem;
 }
 .auth-card.admin .demo-creds {
-	background: rgba(184, 71, 42, 0.12);
-	color: rgba(244, 237, 224, 0.8);
+	background: rgba(255, 82, 27, 0.2);
+	color: rgba(242, 243, 174, 0.9);
 }
 .auth-card.admin .demo-creds code {
-	background: rgba(244, 237, 224, 0.15);
+	background: rgba(242, 243, 174, 0.2);
 	color: var(--paper);
 }
 
