@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin dashboard — Atelier</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <div class="admin-page" id="admin-root">
+      <div class="admin-header">
+        <div>
+          <span class="eyebrow">Admin</span>
+          <h1>Manage catalog</h1>
+          <p class="muted" style="margin-top:0.5rem;">
+            Add, edit, or remove items. Changes appear instantly in the shop.
+          </p>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <aside class="admin-form">
+          <h3 id="form-title">Add a new product</h3>
+          <form id="product-form" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="price">Price (EUR)</label>
+                <input id="price" name="price" type="number" step="0.01" min="0" required>
+              </div>
+              <div class="field">
+                <label for="stock">Stock</label>
+                <input id="stock" name="stock" type="number" min="0" required value="1">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="category">Category</label>
+              <input id="category" name="category" type="text" required
+                     placeholder="e.g. kitchen, ceramics, home">
+            </div>
+
+            <div class="field">
+              <label for="image">Image URL</label>
+              <input id="image" name="image" type="url"
+                     placeholder="https://…">
+            </div>
+
+            <div class="field">
+              <label for="tags">Tags (comma-separated)</label>
+              <input id="tags" name="tags" type="text"
+                     placeholder="brass, lighting, workspace">
+            </div>
+
+            <div class="field">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <div style="display:flex; gap:0.6rem;">
+              <button id="form-submit" type="submit" class="btn btn-primary btn-block">Add product</button>
+              <button id="cancel-edit" type="button" class="btn btn-ghost" hidden>Cancel</button>
+            </div>
+          </form>
+        </aside>
+
+        <div id="admin-table-wrap"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account — Atelier</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <div class="auth-page">
+      <div class="auth-card">
+        <span class="auth-eyebrow">Account</span>
+        <h1 class="auth-title">
+          Join Atelier
+          <small>Create an account to save your cart and orders.</small>
+        </h1>
+
+        <form id="register-form" novalidate>
+          <div id="form-error" class="form-error" hidden></div>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" required minlength="6" autocomplete="new-password">
+            </div>
+            <div class="field">
+              <label for="confirm">Confirm</label>
+              <input id="confirm" name="confirm" type="password" required minlength="6" autocomplete="new-password">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Create account</button>
+        </form>
+
+        <p class="auth-foot">
+          Already have an account? <a href="login.html">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/register.js"></script>
+</body>
+</html>

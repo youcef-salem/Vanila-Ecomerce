@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in — Atelier</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <div class="auth-page">
+      <div class="auth-card">
+        <span class="auth-eyebrow">Account</span>
+        <h1 class="auth-title">
+          Welcome back
+          <small>Sign in to your Atelier account.</small>
+        </h1>
+
+        <form id="login-form" novalidate>
+          <div id="form-error" class="form-error" hidden></div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Sign in</button>
+        </form>
+
+        <div class="demo-creds">
+          <strong>Demo account</strong>
+          <code>alice@example.com</code> / <code>password123</code>
+        </div>
+
+        <p class="auth-foot">
+          New here? <a href="register.html">Create an account</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/pages/login.js"></script>
+</body>
+</html>
