@@ -2,9 +2,9 @@
  * Product detail page
  */
 
-import { api } from '../api/client.js';
-import { cart } from '../modules/cart.js';
-import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../modules/ui.js';
+import { api } from '../../../js/api/client.js';
+import { cart } from '../../../js/modules/cart.js';
+import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../../../js/modules/ui.js';
 
 bootstrap('shop');
 
@@ -25,7 +25,7 @@ onReady(async () => {
     root.innerHTML = `
       <div class="empty-state">
         <h3>Product not found.</h3>
-        <p>We couldn't find that piece. <a href="index.html">Browse the shop</a>.</p>
+        <p>We couldn't find that piece. <a href="/ui/pages/shop/index.html">Browse the shop</a>.</p>
       </div>
     `;
   }
@@ -37,7 +37,7 @@ function render(p) {
   activeImageIndex = 0;
 
   root.innerHTML = `
-    <a class="back-link" href="index.html">← Back to shop</a>
+    <a class="back-link" href="/ui/pages/shop/index.html">← Back to shop</a>
     <div class="product-detail">
       <div class="product-gallery">
         <div class="product-gallery-main">

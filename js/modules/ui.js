@@ -30,17 +30,17 @@ export function renderHeader(activePage = '') {
 
     root.innerHTML = `
       <div class="header-inner">
-        <a href="index.html" class="brand" aria-label="Atelier home">
+        <a href="/ui/pages/shop/index.html" class="brand" aria-label="Atelier home">
           <span class="brand-mark">A</span>
           <span class="brand-word">Atelier</span>
         </a>
 
         <nav class="nav" aria-label="Primary">
-          <a href="index.html" class="${activePage === 'shop' ? 'is-active' : ''}">Shop</a>
-          <a href="index.html#about" class="${activePage === 'about' ? 'is-active' : ''}">About</a>
+          <a href="/ui/pages/shop/index.html" class="${activePage === 'shop' ? 'is-active' : ''}">Shop</a>
+          <a href="/ui/pages/shop/index.html#about" class="${activePage === 'about' ? 'is-active' : ''}">About</a>
           ${
             session.isAdmin()
-              ? `<a href="admin-dashboard.html" class="${activePage === 'admin' ? 'is-active' : ''}">Admin</a>`
+              ? `<a href="/ui/pages/admin-dashboard/index.html" class="${activePage === 'admin' ? 'is-active' : ''}">Admin</a>`
               : ''
           }
         </nav>
@@ -56,11 +56,11 @@ export function renderHeader(activePage = '') {
                 <button class="btn btn-ghost" data-action="logout">Log out</button>
               `
               : `
-                <a href="login.html" class="btn btn-ghost">Log in</a>
-                <a href="register.html" class="btn btn-quiet">Sign up</a>
+                    <a href="/ui/pages/login/index.html" class="btn btn-ghost">Log in</a>
+                    <a href="/ui/pages/register/index.html" class="btn btn-quiet">Sign up</a>
               `
           }
-          <a href="cart.html" class="cart-link" aria-label="View cart">
+                  <a href="/ui/pages/cart/index.html" class="cart-link" aria-label="View cart">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                  stroke-linejoin="round" aria-hidden="true">
@@ -80,7 +80,7 @@ export function renderHeader(activePage = '') {
         logoutBtn.disabled = true;
         await session.logout();
         await cart.refresh();
-        window.location.href = 'index.html';
+        window.location.href = '/ui/pages/shop/index.html';
       });
     }
   };
@@ -103,16 +103,16 @@ export function renderFooter() {
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
-        <a href="index.html">All items</a>
-        <a href="index.html?cat=kitchen">Kitchen</a>
-        <a href="index.html?cat=ceramics">Ceramics</a>
-        <a href="index.html?cat=home">Home</a>
+        <a href="/ui/pages/shop/index.html">All items</a>
+        <a href="/ui/pages/shop/index.html?cat=kitchen">Kitchen</a>
+        <a href="/ui/pages/shop/index.html?cat=ceramics">Ceramics</a>
+        <a href="/ui/pages/shop/index.html?cat=home">Home</a>
       </div>
       <div class="footer-col">
         <h4>Account</h4>
-        <a href="login.html">Log in</a>
-        <a href="register.html">Sign up</a>
-        <a href="admin.html">Admin portal</a>
+        <a href="/ui/pages/login/index.html">Log in</a>
+        <a href="/ui/pages/register/index.html">Sign up</a>
+        <a href="/ui/pages/admin/index.html">Admin portal</a>
       </div>
       <div class="footer-col">
         <h4>Demo</h4>

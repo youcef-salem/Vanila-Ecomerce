@@ -5,9 +5,9 @@
  * - gates the whole page behind an admin-role check
  */
 
-import { api } from '../api/client.js';
-import { session } from '../modules/session.js';
-import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../modules/ui.js';
+import { api } from '../../../js/api/client.js';
+import { session } from '../../../js/modules/session.js';
+import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../js/modules/ui.js';
 
 bootstrap('admin');
 
@@ -29,7 +29,7 @@ onReady(async () => {
         <p class="muted" style="margin-bottom: 1.5rem">
           You need to sign in with an admin account to manage the catalog.
         </p>
-        <a class="btn btn-primary" href="admin.html">Go to admin login</a>
+        <a class="btn btn-primary" href="/ui/pages/admin/index.html">Go to admin login</a>
       </div>
     `;
     return;

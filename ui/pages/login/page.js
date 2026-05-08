@@ -2,9 +2,9 @@
  * Login page
  */
 
-import { session } from '../modules/session.js';
-import { cart } from '../modules/cart.js';
-import { bootstrap, toast, getQueryParam, onReady } from '../modules/ui.js';
+import { session } from '../../../js/modules/session.js';
+import { cart } from '../../../js/modules/cart.js';
+import { bootstrap, toast, getQueryParam, onReady } from '../../../js/modules/ui.js';
 
 bootstrap();
 
@@ -45,8 +45,8 @@ onReady(() => {
 });
 
 function redirectAfterLogin() {
-  const next = getQueryParam('next') || 'index.html';
+  const next = getQueryParam('next') || '/ui/pages/shop/index.html';
   // Avoid open-redirects: only allow same-origin paths.
-  const safe = /^[a-zA-Z0-9_\-./?=&%]+$/.test(next) ? next : 'index.html';
+  const safe = /^[a-zA-Z0-9_\-./?=&%]+$/.test(next) ? next : '/ui/pages/shop/index.html';
   window.location.href = safe;
 }

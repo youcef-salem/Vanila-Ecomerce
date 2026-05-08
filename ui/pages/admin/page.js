@@ -2,9 +2,9 @@
  * Admin login page
  */
 
-import { session } from '../modules/session.js';
-import { cart } from '../modules/cart.js';
-import { bootstrap, toast, onReady } from '../modules/ui.js';
+import { session } from '../../../js/modules/session.js';
+import { cart } from '../../../js/modules/cart.js';
+import { bootstrap, toast, onReady } from '../../../js/modules/ui.js';
 
 bootstrap();
 
@@ -26,7 +26,7 @@ onReady(() => {
       });
       await cart.refresh();
       toast(`Welcome, ${session.user.name}`, { type: 'success' });
-      window.location.href = 'admin-dashboard.html';
+      window.location.href = '/ui/pages/admin-dashboard/index.html';
     } catch (err) {
       errBox.hidden = false;
       errBox.textContent = err.message || 'Admin login failed.';

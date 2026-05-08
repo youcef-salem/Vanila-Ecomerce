@@ -4,9 +4,9 @@
  * Owns: product grid + filters (search, category, sort) on the home page.
  */
 
-import { api } from '../api/client.js';
-import { cart } from '../modules/cart.js';
-import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../modules/ui.js';
+import { api } from '../../../js/api/client.js';
+import { cart } from '../../../js/modules/cart.js';
+import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../../../js/modules/ui.js';
 
 bootstrap('shop');
 
@@ -138,7 +138,7 @@ function renderCard(p) {
         ? `<span class="stock-tag low">Sold out</span>`
         : '';
   return `
-    <a class="product-card" href="product.html?id=${p.id}">
+    <a class="product-card" href="/ui/pages/product/index.html?id=${p.id}">
       <div class="product-card-image">
         ${stockTag}
         <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy">

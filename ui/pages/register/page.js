@@ -2,9 +2,9 @@
  * Register page
  */
 
-import { session } from '../modules/session.js';
-import { cart } from '../modules/cart.js';
-import { bootstrap, toast, onReady } from '../modules/ui.js';
+import { session } from '../../../js/modules/session.js';
+import { cart } from '../../../js/modules/cart.js';
+import { bootstrap, toast, onReady } from '../../../js/modules/ui.js';
 
 bootstrap();
 
@@ -43,7 +43,7 @@ onReady(() => {
       await session.register({ name, email, password });
       await cart.refresh();
       toast(`Welcome, ${session.user.name}`, { type: 'success' });
-      window.location.href = 'index.html';
+      window.location.href = '/ui/pages/shop/index.html';
     } catch (err) {
       errBox.hidden = false;
       errBox.textContent = err.message || 'Registration failed.';

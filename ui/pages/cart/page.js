@@ -2,9 +2,9 @@
  * Cart page
  */
 
-import { cart } from '../modules/cart.js';
-import { session } from '../modules/session.js';
-import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../modules/ui.js';
+import { cart } from '../../../js/modules/cart.js';
+import { session } from '../../../js/modules/session.js';
+import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../js/modules/ui.js';
 
 bootstrap('cart');
 
@@ -31,7 +31,7 @@ function renderPage(state) {
       <div class="cart-empty">
         <h2>Your cart is empty.</h2>
         <p>Start by browsing what's in stock.</p>
-        <a class="btn btn-primary" href="index.html">Browse shop</a>
+        <a class="btn btn-primary" href="/ui/pages/shop/index.html">Browse shop</a>
       </div>
     `;
     return;
@@ -75,7 +75,7 @@ function renderPage(state) {
           ${
             session.isLoggedIn()
               ? 'Logged in — your cart is saved to your account.'
-              : 'Guest checkout. <a href="login.html" style="text-decoration:underline">Log in</a> to save your cart.'
+              : 'Guest checkout. <a href="/ui/pages/login/index.html" style="text-decoration:underline">Log in</a> to save your cart.'
           }
         </p>
       </aside>
@@ -93,7 +93,8 @@ function renderPage(state) {
   document.querySelector('#checkout-btn')?.addEventListener('click', () => {
     if (!session.isLoggedIn()) {
       toast('Please log in to checkout.', { type: 'info' });
-      window.location.href = 'login.html?next=cart.html';
+      const next = encodeURIComponent('/ui/pages/cart/index.html');
+      window.location.href = `/ui/pages/login/index.html?next=${next}`;
       return;
     }
     toast('Demo only — checkout flow is not implemented.', { type: 'info' });
@@ -103,11 +104,11 @@ function renderPage(state) {
 function renderItem(item) {
   return `
     <div class="cart-item" data-id="${item.productId}">
-      <a href="product.html?id=${item.productId}" class="cart-item-img">
+      <a href="/ui/pages/product/index.html?id=${item.productId}" class="cart-item-img">
         <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">
       </a>
       <div class="cart-item-info">
-        <h3><a href="product.html?id=${item.productId}" style="color:inherit">${escapeHtml(item.name)}</a></h3>
+        <h3><a href="/ui/pages/product/index.html?id=${item.productId}" style="color:inherit">${escapeHtml(item.name)}</a></h3>
         <div class="item-price">${formatPrice(item.price, item.currency)} each</div>
         <div class="item-controls">
           <div class="qty-stepper">

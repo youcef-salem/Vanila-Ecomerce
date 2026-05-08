@@ -51,36 +51,51 @@ Then visit `http://localhost:8000/`.
 
 ```
 shop-app/
-├── index.html               # Shop / home page
-├── product.html             # Product detail page
-├── cart.html                # Cart page
-├── login.html               # User login
-├── register.html            # User registration
-├── admin.html               # Admin login portal
-├── admin-dashboard.html     # Admin product management
+├── index.html               # Redirects to the shop page
 │
-├── css/
-│   ├── main.css             # Tokens, header, footer, buttons, forms
-│   └── components.css       # Page-specific styles (shop, product, cart, etc.)
+├── ui/
+│   ├── shared/
+│   │   ├── main.css          # Tokens, header, footer, buttons, forms
+│   │   └── components.css    # Page-specific styles (shop, product, cart, etc.)
+│   └── pages/
+│       ├── shop/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── page.js
+│       ├── product/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── page.js
+│       ├── cart/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── page.js
+│       ├── login/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── page.js
+│       ├── register/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── page.js
+│       ├── admin/
+│       │   ├── index.html
+│       │   ├── styles.css
+│       │   └── page.js
+│       └── admin-dashboard/
+│           ├── index.html
+│           ├── styles.css
+│           └── page.js
 │
 ├── js/
 │   ├── api/
 │   │   ├── client.js        # ⭐ API client — single entry point to "the server"
 │   │   └── mock-data.js     # Seed data for the mock backend
 │   │
-│   ├── modules/
-│   │   ├── session.js       # Current-user state + subscriptions
-│   │   ├── cart.js          # Cart state + subscriptions
-│   │   └── ui.js            # Header/footer rendering, toasts, formatters
-│   │
-│   └── pages/
-│       ├── shop.js
-│       ├── product.js
-│       ├── cart-page.js
-│       ├── login.js
-│       ├── register.js
-│       ├── admin-login.js
-│       └── admin-dashboard.js
+│   └── modules/
+│       ├── session.js       # Current-user state + subscriptions
+│       ├── cart.js          # Cart state + subscriptions
+│       └── ui.js            # Header/footer rendering, toasts, formatters
 │
 ├── API_REFERENCE.md         # Full REST contract
 └── README.md
@@ -91,12 +106,12 @@ shop-app/
 ```
 ┌────────────────────────────────────────────────────────────┐
 │  HTML pages                                                │
-│  index.html · product.html · cart.html · login.html · …    │
+│  ui/pages/*/index.html                                     │
 └─────────────┬──────────────────────────────────────────────┘
               │ load
               ▼
 ┌────────────────────────────────────────────────────────────┐
-│  Page scripts (js/pages/*.js)                              │
+│  Page scripts (ui/pages/*/page.js)                         │
 │  one file per page, owns the page's DOM events             │
 └─────────────┬──────────────────────────────────────────────┘
               │ use
