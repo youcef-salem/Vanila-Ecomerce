@@ -376,7 +376,7 @@ export const api = {
     const product = {
       id: uid('p'),
       slug: slugify(payload.name),
-      currency: 'EUR',
+      currency: 'DZD',
       rating: 0,
       reviews: 0,
       createdAt: new Date().toISOString(),
@@ -458,7 +458,7 @@ function enrichCart(items) {
 
   const subtotal = +enriched.reduce((s, i) => s + i.subtotal, 0).toFixed(2);
   const itemCount = enriched.reduce((s, i) => s + i.quantity, 0);
-  return { items: enriched, subtotal, itemCount, currency: 'EUR' };
+  return { items: enriched, subtotal, itemCount, currency: 'DZD' };
 }
 
 function requireAdmin() {

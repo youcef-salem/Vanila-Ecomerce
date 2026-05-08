@@ -12,7 +12,7 @@ let state = {
   items: [],
   subtotal: 0,
   itemCount: 0,
-  currency: 'EUR',
+  currency: 'DZD',
   loading: false,
 };
 

@@ -1,6 +1,14 @@
 @import '../../shared/main.css';
 @import '../../shared/components.css';
 
+:root {
+	--filters-height: 72px;
+}
+
+body {
+	padding-top: calc(var(--header-height) + var(--filters-height));
+}
+
 /* ============================================================================
 	 SHOP PAGE — hero, filters, product grid
 	 ============================================================================ */
@@ -53,13 +61,15 @@
 
 /* Filters */
 .filters {
-	position: sticky;
-	top: 73px;
+	position: fixed;
+	top: var(--header-height);
+	left: 0;
+	right: 0;
 	background: rgba(244, 237, 224, 0.92);
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 	border-bottom: 1px solid var(--rule);
-	z-index: 10;
+	z-index: 40;
 	padding: 1rem 0;
 }
 .filters-inner {
@@ -235,6 +245,6 @@
 	.hero-lede { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 1.25rem; }
 }
 @media (max-width: 640px) {
-	.filters { top: 0; }
+	:root { --filters-height: 96px; }
 	.hero { padding: 3rem 0 2rem; }
 }

@@ -10,10 +10,10 @@ import { cart } from './cart.js';
 
 // ---- Formatters -----------------------------------------------------------
 
-export function formatPrice(value, currency = 'EUR') {
-  return new Intl.NumberFormat('fr-FR', {
+export function formatPrice(value, _currency = 'DZD') {
+  return new Intl.NumberFormat('fr-DZ', {
     style: 'currency',
-    currency,
+    currency: 'DZD',
     minimumFractionDigits: 2,
   }).format(value);
 }
