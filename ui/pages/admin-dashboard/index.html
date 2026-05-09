@@ -74,6 +74,49 @@
         <div id="admin-table-wrap"></div>
       </div>
     </div>
+
+    <template id="admin-not-authorized-template">
+      <div class="admin-not-authorized">
+        <span class="eyebrow">Restricted</span>
+        <h2 style="font-family: var(--font-display); font-style: italic; margin: 0.5rem 0 1rem;">
+          Admin access only.
+        </h2>
+        <p class="muted" style="margin-bottom: 1.5rem">
+          You need to sign in with an admin account to manage the catalog.
+        </p>
+        <a class="btn btn-primary" href="/ui/pages/admin/index.html">Go to admin login</a>
+      </div>
+    </template>
+
+    <template id="admin-table-template">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </template>
+
+    <template id="admin-table-row-template">
+      <tr>
+        <td><img class="thumb" alt=""></td>
+        <td class="name-cell"></td>
+        <td class="category-cell"></td>
+        <td class="price-cell"></td>
+        <td class="stock-cell"></td>
+        <td class="actions">
+          <button class="btn btn-ghost btn-sm" data-edit>Edit</button>
+          <button class="btn btn-danger btn-sm" data-delete>Delete</button>
+        </td>
+      </tr>
+    </template>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>

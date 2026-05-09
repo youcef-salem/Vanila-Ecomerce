@@ -7,7 +7,7 @@
 
 import { api } from '../../../logic/api/client.js';
 import { session } from '../../../logic/modules/session.js';
-import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../logic/modules/ui.js';
+import { bootstrap, formatPrice, toast, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap('admin');
 
@@ -20,24 +20,25 @@ onReady(async () => {
   await session.refresh();
 
   if (!session.isAdmin()) {
-    document.querySelector('#admin-root').innerHTML = `
-      <div class="admin-not-authorized">
-        <span class="eyebrow">Restricted</span>
-        <h2 style="font-family: var(--font-display); font-style: italic; margin: 0.5rem 0 1rem;">
-          Admin access only.
-        </h2>
-        <p class="muted" style="margin-bottom: 1.5rem">
-          You need to sign in with an admin account to manage the catalog.
-        </p>
-        <a class="btn btn-primary" href="/ui/pages/admin/index.html">Go to admin login</a>
-      </div>
-    `;
+    const root = document.querySelector('#admin-root');
+    const fragment = cloneTemplate('admin-not-authorized-template');
+    if (root && fragment) root.replaceChildren(fragment);
     return;
   }
 
   await loadProducts();
   setupForm();
 });
+
+function cloneTemplate(id) {
+  const template = document.querySelector(`#${id}`);
+  return template ? template.content.cloneNode(true) : null;
+}
+
+function cloneTemplateElement(id) {
+  const template = document.querySelector(`#${id}`);
+  return template ? template.content.firstElementChild.cloneNode(true) : null;
+}
 
 async function loadProducts() {
   const { items } = await api.listProducts({ sort: 'newest' });
@@ -48,39 +49,37 @@ async function loadProducts() {
 function renderTable() {
   const root = document.querySelector('#admin-table-wrap');
   if (!root) return;
-  root.innerHTML = `
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Stock</th>
-          <th class="actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${products
-          .map(
-            (p) => `
-          <tr data-id="${p.id}">
-            <td><img class="thumb" src="${escapeHtml(p.image)}" alt=""></td>
-            <td class="name-cell">${escapeHtml(p.name)}</td>
-            <td>${escapeHtml(p.category)}</td>
-            <td class="price-cell">${formatPrice(p.price, p.currency)}</td>
-            <td class="stock-cell ${p.stock < 5 ? 'low' : ''}">${p.stock}</td>
-            <td class="actions">
-              <button class="btn btn-ghost btn-sm" data-edit="${p.id}">Edit</button>
-              <button class="btn btn-danger btn-sm" data-delete="${p.id}">Delete</button>
-            </td>
-          </tr>
-        `,
-          )
-          .join('')}
-      </tbody>
-    </table>
-  `;
+  const tableFragment = cloneTemplate('admin-table-template');
+  if (!tableFragment) return;
+  root.replaceChildren(tableFragment);
+
+  const tbody = root.querySelector('tbody');
+  if (!tbody) return;
+
+  products.forEach((p) => {
+    const row = cloneTemplateElement('admin-table-row-template');
+    if (!row) return;
+
+    row.dataset.id = p.id;
+    const img = row.querySelector('.thumb');
+    const nameCell = row.querySelector('.name-cell');
+    const categoryCell = row.querySelector('.category-cell');
+    const priceCell = row.querySelector('.price-cell');
+    const stockCell = row.querySelector('.stock-cell');
+    const editBtn = row.querySelector('[data-edit]');
+    const deleteBtn = row.querySelector('[data-delete]');
+
+    img.src = p.image;
+    nameCell.textContent = p.name;
+    categoryCell.textContent = p.category;
+    priceCell.textContent = formatPrice(p.price, p.currency);
+    stockCell.textContent = p.stock;
+    stockCell.classList.toggle('low', p.stock < 5);
+    editBtn.dataset.edit = p.id;
+    deleteBtn.dataset.delete = p.id;
+
+    tbody.append(row);
+  });
 
   root.querySelectorAll('[data-edit]').forEach((btn) => {
     btn.addEventListener('click', () => startEdit(btn.dataset.edit));

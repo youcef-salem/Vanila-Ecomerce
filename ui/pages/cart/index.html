@@ -13,6 +13,93 @@
     <div class="cart-page" id="cart-root">
       <p class="muted" style="text-align:center;padding:3rem">Loading cart…</p>
     </div>
+
+    <template id="cart-loading-template">
+      <p class="muted" style="text-align:center;padding:3rem">Loading cart…</p>
+    </template>
+
+    <template id="cart-empty-template">
+      <div>
+        <header><h1>Your cart</h1></header>
+        <div class="cart-empty">
+          <h2>Your cart is empty.</h2>
+          <p>Start by browsing what's in stock.</p>
+          <a class="btn btn-primary" href="/ui/pages/shop/index.html">Browse shop</a>
+        </div>
+      </div>
+    </template>
+
+    <template id="cart-layout-template">
+      <div>
+        <header>
+          <span class="eyebrow">Cart</span>
+          <h1>Your selection</h1>
+          <p class="muted" style="margin-top:0.5rem">
+            <span id="cart-item-count"></span>
+          </p>
+        </header>
+
+        <div class="cart-page-grid">
+          <div class="cart-list" id="cart-list">
+            <div id="cart-items"></div>
+            <div style="display:flex;justify-content:flex-end;padding-top:1.5rem">
+              <button class="btn btn-quiet" id="clear-cart">Clear cart</button>
+            </div>
+          </div>
+
+          <aside class="cart-summary">
+            <h3>Summary</h3>
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="summary-subtotal"></span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span class="muted">Calculated at checkout</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="summary-total"></span>
+            </div>
+            <button class="btn btn-primary btn-block btn-lg" id="checkout-btn">
+              Checkout
+            </button>
+            <p class="summary-note" id="summary-note"></p>
+          </aside>
+        </div>
+      </div>
+    </template>
+
+    <template id="cart-item-template">
+      <div class="cart-item">
+        <a class="cart-item-img">
+          <img alt="">
+        </a>
+        <div class="cart-item-info">
+          <h3><a class="cart-item-link" style="color:inherit"></a></h3>
+          <div class="item-price" data-role="item-price"></div>
+          <div class="item-controls">
+            <div class="qty-stepper">
+              <button data-step="-1" aria-label="Decrease">&minus;</button>
+              <input class="qty-input" type="number" min="1">
+              <button data-step="1" aria-label="Increase">+</button>
+            </div>
+            <button class="item-remove">Remove</button>
+          </div>
+        </div>
+        <div class="cart-item-subtotal" data-role="item-subtotal"></div>
+      </div>
+    </template>
+
+    <template id="cart-summary-logged-in-template">
+      <span>Logged in — your cart is saved to your account.</span>
+    </template>
+
+    <template id="cart-summary-guest-template">
+      <span>Guest checkout. </span>
+      <a href="/ui/pages/login/index.html" style="text-decoration:underline">Log in</a>
+      <span> to save your cart.</span>
+    </template>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>

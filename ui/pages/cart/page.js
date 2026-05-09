@@ -4,7 +4,7 @@
 
 import { cart } from '../../../logic/modules/cart.js';
 import { session } from '../../../logic/modules/session.js';
-import { bootstrap, formatPrice, escapeHtml, toast, onReady } from '../../../logic/modules/ui.js';
+import { bootstrap, formatPrice, toast, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap('cart');
 
@@ -16,71 +16,85 @@ onReady(async () => {
   renderPage(cart.state);
 });
 
+function cloneTemplate(id) {
+  const template = document.querySelector(`#${id}`);
+  return template ? template.content.cloneNode(true) : null;
+}
+
 function renderPage(state) {
   const root = document.querySelector('#cart-root');
   if (!root) return;
 
   if (state.loading && !state.items.length) {
-    root.innerHTML = `<p class="muted" style="text-align:center;padding:3rem">Loading cart…</p>`;
+    const fragment = cloneTemplate('cart-loading-template');
+    if (fragment) root.replaceChildren(fragment);
     return;
   }
 
   if (!state.items.length) {
-    root.innerHTML = `
-      <header><h1>Your cart</h1></header>
-      <div class="cart-empty">
-        <h2>Your cart is empty.</h2>
-        <p>Start by browsing what's in stock.</p>
-        <a class="btn btn-primary" href="/ui/pages/shop/index.html">Browse shop</a>
-      </div>
-    `;
+    const fragment = cloneTemplate('cart-empty-template');
+    if (fragment) root.replaceChildren(fragment);
     return;
   }
 
-  root.innerHTML = `
-    <header>
-      <span class="eyebrow">Cart</span>
-      <h1>Your selection</h1>
-      <p class="muted" style="margin-top:0.5rem">
-        ${state.itemCount} ${state.itemCount === 1 ? 'item' : 'items'}
-      </p>
-    </header>
+  const layout = cloneTemplate('cart-layout-template');
+  if (layout) root.replaceChildren(layout);
 
-    <div class="cart-page-grid">
-      <div class="cart-list">
-        ${state.items.map(renderItem).join('')}
-        <div style="display:flex;justify-content:flex-end;padding-top:1.5rem">
-          <button class="btn btn-quiet" id="clear-cart">Clear cart</button>
-        </div>
-      </div>
+  const count = root.querySelector('#cart-item-count');
+  if (count) {
+    count.textContent = `${state.itemCount} ${state.itemCount === 1 ? 'item' : 'items'}`;
+  }
 
-      <aside class="cart-summary">
-        <h3>Summary</h3>
-        <div class="summary-row">
-          <span>Subtotal</span>
-          <span>${formatPrice(state.subtotal, state.currency)}</span>
-        </div>
-        <div class="summary-row">
-          <span>Shipping</span>
-          <span class="muted">Calculated at checkout</span>
-        </div>
-        <div class="summary-row total">
-          <span>Total</span>
-          <span>${formatPrice(state.subtotal, state.currency)}</span>
-        </div>
-        <button class="btn btn-primary btn-block btn-lg" id="checkout-btn">
-          Checkout
-        </button>
-        <p class="summary-note">
-          ${
-            session.isLoggedIn()
-              ? 'Logged in — your cart is saved to your account.'
-              : 'Guest checkout. <a href="/ui/pages/login/index.html" style="text-decoration:underline">Log in</a> to save your cart.'
-          }
-        </p>
-      </aside>
-    </div>
-  `;
+  const subtotalNode = root.querySelector('#summary-subtotal');
+  const totalNode = root.querySelector('#summary-total');
+  if (subtotalNode) subtotalNode.textContent = formatPrice(state.subtotal, state.currency);
+  if (totalNode) totalNode.textContent = formatPrice(state.subtotal, state.currency);
+
+  const note = root.querySelector('#summary-note');
+  if (note) {
+    const noteTemplate = session.isLoggedIn()
+      ? cloneTemplate('cart-summary-logged-in-template')
+      : cloneTemplate('cart-summary-guest-template');
+    if (noteTemplate) note.replaceChildren(noteTemplate);
+  }
+
+  const itemsWrap = root.querySelector('#cart-items');
+  if (itemsWrap) {
+    itemsWrap.replaceChildren();
+    state.items.forEach((item) => {
+      const frag = cloneTemplate('cart-item-template');
+      if (!frag) return;
+      const row = frag.firstElementChild;
+      row.dataset.id = item.productId;
+
+      const link = row.querySelector('.cart-item-img');
+      const titleLink = row.querySelector('.cart-item-link');
+      const img = row.querySelector('img');
+      const price = row.querySelector('[data-role="item-price"]');
+      const subtotal = row.querySelector('[data-role="item-subtotal"]');
+      const qtyInput = row.querySelector('.qty-input');
+      const removeBtn = row.querySelector('.item-remove');
+      const stepBtns = row.querySelectorAll('[data-step]');
+
+      const href = `/ui/pages/product/index.html?id=${item.productId}`;
+      link.href = href;
+      titleLink.href = href;
+      titleLink.textContent = item.name;
+      img.src = item.image;
+      img.alt = item.name;
+      price.textContent = `${formatPrice(item.price, item.currency)} each`;
+      subtotal.textContent = formatPrice(item.subtotal, item.currency);
+
+      qtyInput.value = item.quantity;
+      qtyInput.dataset.id = item.productId;
+      removeBtn.dataset.remove = item.productId;
+      stepBtns.forEach((btn) => {
+        btn.dataset.id = item.productId;
+      });
+
+      itemsWrap.append(frag);
+    });
+  }
 
   wireCartItems();
 
@@ -99,30 +113,6 @@ function renderPage(state) {
     }
     window.location.href = '/ui/pages/checkout/index.html';
   });
-}
-
-function renderItem(item) {
-  return `
-    <div class="cart-item" data-id="${item.productId}">
-      <a href="/ui/pages/product/index.html?id=${item.productId}" class="cart-item-img">
-        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">
-      </a>
-      <div class="cart-item-info">
-        <h3><a href="/ui/pages/product/index.html?id=${item.productId}" style="color:inherit">${escapeHtml(item.name)}</a></h3>
-        <div class="item-price">${formatPrice(item.price, item.currency)} each</div>
-        <div class="item-controls">
-          <div class="qty-stepper">
-            <button data-step="-1" data-id="${item.productId}" aria-label="Decrease">−</button>
-            <input class="qty-input" type="number" value="${item.quantity}" min="1"
-                   data-id="${item.productId}">
-            <button data-step="1" data-id="${item.productId}" aria-label="Increase">+</button>
-          </div>
-          <button class="item-remove" data-remove="${item.productId}">Remove</button>
-        </div>
-      </div>
-      <div class="cart-item-subtotal">${formatPrice(item.subtotal, item.currency)}</div>
-    </div>
-  `;
 }
 
 function wireCartItems() {

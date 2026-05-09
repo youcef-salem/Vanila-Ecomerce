@@ -13,6 +13,74 @@
     <div id="product-root">
       <p class="muted" style="padding: 4rem 1rem; text-align: center;">Loading…</p>
     </div>
+
+    <template id="product-empty-template">
+      <p class="muted" style="padding: 4rem 1rem; text-align: center;">No product selected.</p>
+    </template>
+
+    <template id="product-not-found-template">
+      <div class="empty-state">
+        <h3>Product not found.</h3>
+        <p>We couldn't find that piece. <a href="/ui/pages/shop/index.html">Browse the shop</a>.</p>
+      </div>
+    </template>
+
+    <template id="product-layout-template">
+      <div>
+        <a class="back-link" id="product-back-link" href="/ui/pages/shop/index.html">&larr; Back to shop</a>
+        <div class="product-detail">
+          <div class="product-gallery">
+            <div class="product-gallery-main">
+              <img id="gallery-main" alt="">
+            </div>
+            <div class="product-gallery-thumbs" id="gallery-thumbs"></div>
+          </div>
+
+          <div class="product-info">
+            <span class="eyebrow" id="product-category"></span>
+            <h1 id="product-name"></h1>
+            <div class="product-info-rating">
+              <span class="stars" id="product-stars"></span>
+              <span id="product-reviews"></span>
+            </div>
+            <div class="product-info-price" id="product-price"></div>
+
+            <div class="product-info-desc" id="product-description"></div>
+
+            <div class="product-info-actions">
+              <div class="qty-stepper">
+                <button type="button" data-step="-1" aria-label="Decrease quantity">&minus;</button>
+                <input type="number" id="qty-input" value="1" min="1">
+                <button type="button" data-step="1" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="btn btn-primary btn-lg" id="add-to-cart"></button>
+            </div>
+
+            <div class="product-info-meta">
+              <dl>
+                <dt>Stock</dt>
+                <dd id="product-stock"></dd>
+                <dt>Category</dt>
+                <dd id="product-category-meta"></dd>
+                <dt>Item ref.</dt>
+                <dd><code id="product-id"></code></dd>
+              </dl>
+              <div class="product-tags" id="product-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template id="product-thumb-template">
+      <button data-i>
+        <img alt="">
+      </button>
+    </template>
+
+    <template id="product-tag-template">
+      <span class="product-tag"></span>
+    </template>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>

@@ -6,7 +6,7 @@
 
 import { api } from '../../../logic/api/client.js';
 import { cart } from '../../../logic/modules/cart.js';
-import { bootstrap, formatPrice, escapeHtml, toast, getQueryParam, onReady } from '../../../logic/modules/ui.js';
+import { bootstrap, formatPrice, toast, getQueryParam, onReady } from '../../../logic/modules/ui.js';
 
 bootstrap('shop');
 
@@ -24,21 +24,30 @@ onReady(async () => {
   await loadProducts();
 });
 
+function cloneTemplate(id) {
+  const template = document.querySelector(`#${id}`);
+  return template ? template.content.cloneNode(true) : null;
+}
+
+function cloneTemplateElement(id) {
+  const template = document.querySelector(`#${id}`);
+  return template ? template.content.firstElementChild.cloneNode(true) : null;
+}
+
 async function renderCategories() {
   const root = document.querySelector('#cat-pills');
   if (!root) return;
   const { items } = await api.listCategories();
   const all = [{ id: 'all', label: 'Everything' }, ...items];
-  root.innerHTML = all
-    .map(
-      (c) => `
-        <button class="cat-pill ${filters.category === c.id ? 'is-active' : ''}"
-                data-cat="${c.id}">
-          ${escapeHtml(c.label)}
-        </button>
-      `,
-    )
-    .join('');
+  root.replaceChildren();
+  all.forEach((c) => {
+    const btn = cloneTemplateElement('shop-category-pill-template');
+    if (!btn) return;
+    btn.dataset.cat = c.id;
+    btn.textContent = c.label;
+    btn.classList.toggle('is-active', filters.category === c.id);
+    root.append(btn);
+  });
 
   root.addEventListener('click', (e) => {
     const btn = e.target.closest('.cat-pill');
@@ -70,17 +79,11 @@ function setupFilterEvents() {
 function showSkeletons() {
   const grid = document.querySelector('#product-grid');
   if (!grid) return;
-  grid.innerHTML = Array.from({ length: 8 })
-    .map(
-      () => `
-      <div class="skeleton-card" aria-hidden="true">
-        <div class="skeleton-block image"></div>
-        <div class="skeleton-block line w-60"></div>
-        <div class="skeleton-block line"></div>
-      </div>
-    `,
-    )
-    .join('');
+  grid.replaceChildren();
+  for (let i = 0; i < 8; i += 1) {
+    const card = cloneTemplate('shop-skeleton-card-template');
+    if (card) grid.append(card);
+  }
 }
 
 async function loadProducts() {
@@ -101,15 +104,15 @@ function renderProducts(items) {
   const grid = document.querySelector('#product-grid');
   if (!grid) return;
   if (!items.length) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <h3>Nothing matches that.</h3>
-        <p class="muted">Try a different search or clear the filters.</p>
-      </div>
-    `;
+    const empty = cloneTemplate('shop-empty-template');
+    if (empty) grid.replaceChildren(empty);
     return;
   }
-  grid.innerHTML = items.map(renderCard).join('');
+  grid.replaceChildren();
+  items.forEach((item) => {
+    const card = renderCard(item);
+    if (card) grid.append(card);
+  });
 
   // Wire up "add to cart" buttons.
   grid.querySelectorAll('[data-add]').forEach((btn) => {
@@ -131,29 +134,35 @@ function renderProducts(items) {
 }
 
 function renderCard(p) {
-  const stockTag =
-    p.stock <= 5 && p.stock > 0
-      ? `<span class="stock-tag low">Only ${p.stock} left</span>`
-      : p.stock === 0
-        ? `<span class="stock-tag low">Sold out</span>`
-        : '';
-  return `
-    <a class="product-card" href="/ui/pages/product/index.html?id=${p.id}">
-      <div class="product-card-image">
-        ${stockTag}
-        <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy">
-      </div>
-      <div class="product-card-meta">
-        <span>${escapeHtml(p.category)}</span>
-        <span class="product-card-rating">
-          <span class="stars">${renderStars(p.rating)}</span>
-          <span>${p.reviews || 0}</span>
-        </span>
-      </div>
-      <h3 class="product-card-name">${escapeHtml(p.name)}</h3>
-      <div class="product-card-price">${formatPrice(p.price, p.currency)}</div>
-    </a>
-  `;
+  const card = cloneTemplateElement('shop-product-card-template');
+  if (!card) return null;
+
+  card.href = `/ui/pages/product/index.html?id=${p.id}`;
+  const img = card.querySelector('img');
+  img.src = p.image;
+  img.alt = p.name;
+
+  card.querySelector('.product-category').textContent = p.category;
+  card.querySelector('.product-card-name').textContent = p.name;
+  card.querySelector('.product-card-price').textContent = formatPrice(p.price, p.currency);
+
+  const stars = card.querySelector('[data-role="stars"]');
+  const reviews = card.querySelector('[data-role="review-count"]');
+  stars.textContent = renderStars(p.rating);
+  reviews.textContent = p.reviews || 0;
+
+  const stockTag = card.querySelector('[data-role="stock-tag"]');
+  if (p.stock === 0) {
+    stockTag.textContent = 'Sold out';
+    stockTag.hidden = false;
+  } else if (p.stock <= 5) {
+    stockTag.textContent = `Only ${p.stock} left`;
+    stockTag.hidden = false;
+  } else {
+    stockTag.hidden = true;
+  }
+
+  return card;
 }
 
 function renderStars(rating = 0) {

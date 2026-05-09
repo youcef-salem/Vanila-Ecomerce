@@ -77,6 +77,43 @@
         </div>
       </div>
     </section>
+
+    <template id="shop-category-pill-template">
+      <button class="cat-pill" data-cat></button>
+    </template>
+
+    <template id="shop-skeleton-card-template">
+      <div class="skeleton-card" aria-hidden="true">
+        <div class="skeleton-block image"></div>
+        <div class="skeleton-block line w-60"></div>
+        <div class="skeleton-block line"></div>
+      </div>
+    </template>
+
+    <template id="shop-empty-template">
+      <div class="empty-state">
+        <h3>Nothing matches that.</h3>
+        <p class="muted">Try a different search or clear the filters.</p>
+      </div>
+    </template>
+
+    <template id="shop-product-card-template">
+      <a class="product-card">
+        <div class="product-card-image">
+          <span class="stock-tag low" data-role="stock-tag" hidden></span>
+          <img alt="" loading="lazy">
+        </div>
+        <div class="product-card-meta">
+          <span class="product-category"></span>
+          <span class="product-card-rating">
+            <span class="stars" data-role="stars"></span>
+            <span data-role="review-count"></span>
+          </span>
+        </div>
+        <h3 class="product-card-name"></h3>
+        <div class="product-card-price"></div>
+      </a>
+    </template>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>

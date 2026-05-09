@@ -13,6 +13,111 @@
     <div class="checkout-page" id="checkout-root">
       <p class="muted" style="text-align:center;padding:3rem">Loading checkout…</p>
     </div>
+
+    <template id="checkout-empty-template">
+      <div class="checkout-empty">
+        <h2>Your cart is empty.</h2>
+        <p class="muted">Add items before checking out.</p>
+        <a class="btn btn-primary" href="/ui/pages/shop/index.html">Browse shop</a>
+      </div>
+    </template>
+
+    <template id="checkout-login-template">
+      <div class="checkout-empty">
+        <h2>Please log in to checkout.</h2>
+        <p class="muted">Your cart is saved once you sign in.</p>
+        <a class="btn btn-primary" href="/ui/pages/login/index.html?next=/ui/pages/checkout/index.html">Log in</a>
+      </div>
+    </template>
+
+    <template id="checkout-form-template">
+      <div>
+        <div class="checkout-header">
+          <span class="eyebrow">Checkout</span>
+          <h1>Delivery & payment</h1>
+          <p class="muted" style="margin-top:0.5rem">
+            Review your order and confirm delivery details.
+          </p>
+        </div>
+
+        <div class="checkout-grid">
+          <div class="checkout-card">
+            <form id="checkout-form" novalidate>
+              <div id="form-error" class="form-error" hidden></div>
+
+              <div class="field">
+                <label for="wilaya">Delivery wilaya</label>
+                <select id="wilaya" name="wilaya" required>
+                  <option value="" selected>Select wilaya</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Delivery method</label>
+                <div class="segmented" role="radiogroup" id="delivery-methods"></div>
+              </div>
+
+              <div class="field">
+                <label for="address">Exact address</label>
+                <textarea id="address" name="address" rows="4" required placeholder="Street, building, city"></textarea>
+              </div>
+
+              <div class="field">
+                <label>Payment method</label>
+                <div class="segmented" role="radiogroup">
+                  <label class="segmented-item">
+                    <input type="radio" name="payment" value="dahabiya" checked>
+                    <span>Dahabiya</span>
+                  </label>
+                  <label class="segmented-item">
+                    <input type="radio" name="payment" value="cod">
+                    <span>Cash on delivery</span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg">Place order</button>
+            </form>
+          </div>
+
+          <aside class="checkout-card" id="summary-card">
+            <div class="summary-title">Order summary</div>
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotal"></span>
+            </div>
+            <div class="summary-row">
+              <span>Delivery</span>
+              <span id="delivery"></span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="total"></span>
+            </div>
+            <p class="summary-note">Delivery price updates after choosing a wilaya.</p>
+          </aside>
+        </div>
+      </div>
+    </template>
+
+    <template id="checkout-wilaya-option-template">
+      <option></option>
+    </template>
+
+    <template id="checkout-delivery-method-template">
+      <label class="segmented-item">
+        <input type="radio" name="deliveryMethod">
+        <span></span>
+      </label>
+    </template>
+
+    <template id="checkout-success-template">
+      <div class="checkout-success">
+        <h2>Thank you!</h2>
+        <p class="muted">Your order has been received.</p>
+        <a class="btn btn-primary" href="/ui/pages/shop/index.html">Back to shop</a>
+      </div>
+    </template>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>
