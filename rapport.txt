@@ -1,0 +1,61 @@
+Atelier Shop Frontend - One-Page Production Report (May 10, 2026)
+
+Overview
+This project is a production-ready e-commerce frontend built with vanilla HTML, CSS, and ES modules. It consumes a real REST API (not mock) through a single API client file. Switching environments is done by pointing the API client to the live backend base URL and enabling real network requests. The UI is organized as independent pages with shared state modules for session, cart, and UI utilities.
+
+Pages and Functionality
+
+1) Shop Page
+- Product listing with search, category filters, and sorting.
+- Responsive grid for browsing.
+- Entry point of the application (root redirects here).
+
+2) Product Detail Page
+- Full product information and image gallery.
+- Quantity stepper and add-to-cart action.
+
+3) Cart Page
+- View cart items with line totals.
+- Edit quantities, remove items, or clear cart.
+- Summary with subtotal and item count.
+
+4) Checkout Page
+- Delivery wilaya selection and delivery method.
+- Payment method and delivery address.
+- Submit order to backend and receive order confirmation.
+
+5) Login Page
+- Customer authentication.
+- Creates a session and stores a secure session cookie.
+
+6) Register Page
+- Customer account creation.
+- Starts a session immediately after registration.
+
+7) Admin Login Page
+- Dedicated admin authentication.
+- Validates admin role before allowing access.
+
+8) Admin Dashboard Page
+- Create, update, and delete products.
+- Changes are reflected in the shop catalog after API updates.
+
+Production API Contract (Live Backend)
+- Products: list, filter, and view product details.
+- Categories: list categories for filter UI.
+- Auth: register, login, logout, and current-user lookup.
+- Cart: get cart, add items, update quantity, remove items, clear cart.
+- Delivery: list wilayas and delivery methods for checkout.
+- Checkout: create order from current cart.
+- Admin: product CRUD for users with admin role.
+
+Sessions and Security (Production)
+- The backend sets an HttpOnly session cookie named atelier_sid.
+- Cookies are Secure and SameSite=Lax.
+- The frontend sends credentials with every request.
+- Guest carts are supported via a separate guest cookie and should be merged on login by the backend.
+
+Architecture Summary
+- UI pages handle DOM and user interactions.
+- Shared modules handle session state, cart state, and UI helpers.
+- A single API client file centralizes all server communication and targets the production REST API.
